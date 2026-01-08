@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAU Schedule Maker | جامعة عمان العربية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Header -->
+        <header class="main-header">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <i class="ph ph-graduation-cap"></i>
+                </div>
+                <h1>AAU Schedule Maker</h1>
+                <p>جامعة عمان العربية</p>
+            </div>
+            <p class="subtitle">Upload your schedule PDF to analyze free time and organize courses.</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="content-area">
+
+            <!-- Upload Section -->
+            <section class="upload-section" id="uploadSection">
+                <div class="upload-grid">
+                    <div class="drop-zone" id="dropZonePdf">
+                        <div class="icon-container">
+                            <i class="ph ph-users-three"></i>
+                        </div>
+                        <h3>Doctor Schedule</h3>
+                        <p>Upload Master PDF</p>
+                        <input type="file" id="fileInputPdf" accept=".pdf" hidden>
+                        <div class="file-status hidden" id="statusPdf"><i class="ph ph-check-circle"></i>
+                            <span>Selected</span></div>
+                    </div>
+
+                    <div class="drop-zone" id="dropZoneDocx">
+                        <div class="icon-container">
+                            <i class="ph ph-exam"></i>
+                        </div>
+                        <h3>Exam Schedule</h3>
+                        <p>Upload Exams Word (.docx)</p>
+                        <input type="file" id="fileInputDocx" accept=".docx,.doc" hidden>
+                        <div class="file-status hidden" id="statusDocx"><i class="ph ph-check-circle"></i>
+                            <span>Selected</span></div>
+                    </div>
+                </div>
+
+                <button id="processBtn" class="btn-primary" disabled>
+                    <i class="ph ph-gear"></i> Match Schedules
+                </button>
+
+                <div class="loading-state hidden" id="loadingState">
+                    <div class="spinner"></div>
+                    <p>Correlating Schedules...</p>
+                </div>
+                <div class="error-message hidden" id="errorMessage">
+                    <i class="ph ph-warning-circle"></i>
+                    <span id="errorText">Error uploading file.</span>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section hidden" id="resultsSection">
+                <button class="btn-secondary" id="resetBtn">
+                    <i class="ph ph-arrow-counter-clockwise"></i> Upload Another
+                </button>
+
+                <div class="instructor-card">
+                    <div class="card-header">
+                        <h2 id="instructorName">Instructor Name</h2>
+                        <span class="badge">Faculty Member</span>
+                    </div>
+
+                    <div class="schedule-grid">
+                        <div class="column courses-column">
+                            <h3><i class="ph ph-chalkboard-teacher"></i> Courses</h3>
+                            <div class="list-container" id="coursesList">
+                                <!-- Courses injected here -->
+                            </div>
+                        </div>
+
+                        <div class="column free-time-column">
+                            <h3><i class="ph ph-coffee"></i> Free Time Slots</h3>
+                            <div class="list-container" id="freeTimeList">
+                                <!-- Free time injected here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+
+</html>

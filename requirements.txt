@@ -1,0 +1,6 @@
+flask
+pdfplumber
+arabic-reshaper
+python-bidi
+python-docx
+gunicorn==21.2.0
